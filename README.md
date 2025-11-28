@@ -38,6 +38,21 @@ Or manually:
 
     python strawberry_flower_mapping.py
 
+
+4. After the map and JSON file are generated in the `multi_results/` folder,  
+   run the distance computation and drift analysis script:
+
+    python compute_path_distances.py
+
+   This script:
+   - Reads the coordinates from `merged_world_map.json`  
+   - Computes segment-by-segment distances (Tag0 → flower1 → flower2 …)  
+   - Applies direction-based drift correction (left/right/forward)  
+   - Outputs a readable report showing all travel distances in meters  
+   - Summarizes total path length with and without drift adjustments  
+
+All results are printed directly in the terminal for quick analysis.
+
 ---
 
 ## Outputs
@@ -78,6 +93,18 @@ The dataset includes **four custom labeling classes**:
 - **late** – wilted or end-stage flowers  
 
 These labels were used to fine-tune the YOLOv8 model for improved accuracy in greenhouse environments.
+
+## Path Analysis
+
+Once the world map is created, the **`compute_path_distances.py`** script provides quantitative analysis of the drone's navigation path.
+
+It calculates:
+- Straight-line distances between Tag0 and each detected flower  
+- Adjusted travel distances accounting for real-world drift effects  
+- Total flight path length (raw vs. compensated)
+
+This helps evaluate the **efficiency and accuracy** of autonomous pollination missions and can be extended for motion planning or simulation.
+
 
 ### **Download**
 The full training dataset used for this project is available here:
